@@ -1,0 +1,18 @@
+FROM arm32v7/debian:9.8-slim
+
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y apt-utils dns-root-data gnutls-bin libfontconfig1 locales wget \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
+    && cd /tmp \
+    && wget https://dl.grafana.com/oss/release/grafana_6.0.1_armhf.deb \
+    && dpkg -i grafana_6.0.1_armhf.deb \
+    && rm -f /tmp/grafana_6.0.1_armhf.deb \
+    && apt-get clean -y \
+    && apt-get autoclean -y \
+    && apt-get autoremove -y \
+    && rm -rf /root/.cache \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV LANG en_US.utf8
+EXPOSE 3000/tcp

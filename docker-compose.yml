@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+
+  # REF: https://hub.docker.com/r/arm32v7/debian
+  # REF: https://grafana.com/grafana/download/6.0.1?platform=arm
+  grafana:
+    image: ernestgwilsonii/docker-raspberry-pi-grafana:6.0.1
+    hostname: grafana
+    environment:
+      - GF_SERVER_PROTOCOL=https
+      - GF_SERVER_CERT_FILE=/var/lib/grafana/grafana.crt
+      - GF_SERVER_CERT_KEY=/var/lib/grafana/grafana.key
+      - GF_AUTH_LDAP_ENABLED=true
+      - GF_AUTH_LDAP_CONFIG_FILE=/var/lib/grafana/ldap.toml
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,percona-percona-app,raintank-kubernetes-app,ntop-ntopng-datasource,natel-plotly-panel,camptocamp-prometheus-alertmanager-datasource,vonage-status-panel,fetzerch-sunandmoon-datasource,radensolutions-netxms-datasource
+    volumes:
+      - type: bind
+        source: /opt/grafana
+        target: /var/lib/grafana
+    networks:
+      - grafana-net1
+    ports:
+      - mode: host
+        target: 3000
+        published: 3000
+    deploy:
+      labels:
+        local.description: "Grafana"
+      restart_policy:
+        condition: on-failure
+
+networks:
+  grafana-net1:
