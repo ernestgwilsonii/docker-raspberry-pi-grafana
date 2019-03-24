@@ -1,3 +1,8 @@
+# STOP!
+# Use official image!
+docker pull grafana/grafana-arm32v7-linux
+# REF: https://github.com/grafana/grafana/tree/master/packaging/docker
+
 ####################################################
 # Grafana (in a Docker Container) for Raspberry Pi #
 #                        REF: https://grafana.com/ #
