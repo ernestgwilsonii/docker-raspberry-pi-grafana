@@ -1,5 +1,6 @@
 # STOP!
 # Use official image!
+# REF: https://hub.docker.com/r/grafana/grafana-arm32v7-linux/tags
 #docker pull grafana/grafana-arm32v7-linux:latest
 docker run -d --name=grafana -p 3000:3000 grafana/grafana-arm32v7-linux:6.0.2
 # http://YourRaspberryPiIpAddress:3000
