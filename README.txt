@@ -1,6 +1,7 @@
 # STOP!
 # Use official image!
 docker pull grafana/grafana-arm32v7-linux
+docker run -d --name=grafana -p 3000:3000 grafana/grafana-arm32v7-linux:latest
 # REF: https://github.com/grafana/grafana/tree/master/packaging/docker
 
 ####################################################
