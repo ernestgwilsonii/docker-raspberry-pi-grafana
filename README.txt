@@ -6,6 +6,27 @@ docker run -d --name=grafana -p 3000:3000 grafana/grafana-arm32v7-linux:6.0.2
 # http://YourRaspberryPiIpAddress:3000
 # REF: https://github.com/grafana/grafana/tree/master/packaging/docker
 
+
+# REF https://stackoverflow.com/questions/24481564/how-can-i-find-a-docker-image-with-a-specific-tag-in-docker-registry-on-the-dock
+# To get a tag list, add this bash function
+function list-dh-tags(){
+    wget -q https://registry.hub.docker.com/v1/repositories/$1/tags -O -  | sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' | tr '}' '\n'  | awk -F: '{print $3}'
+}
+
+list-dh-tags grafana/grafana-arm32v7-linux
+latest
+5.4.3
+6.0.0
+6.0.0-beta1
+6.0.0-beta2
+6.0.0-beta3
+6.0.1
+6.0.2
+master
+
+
+
+
 ####################################################
 # Grafana (in a Docker Container) for Raspberry Pi #
 #                        REF: https://grafana.com/ #
