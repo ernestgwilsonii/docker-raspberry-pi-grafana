@@ -1,7 +1,7 @@
 # STOP!
 # Use official image!
-docker pull grafana/grafana-arm32v7-linux
-docker run -d --name=grafana -p 3000:3000 grafana/grafana-arm32v7-linux:latest
+#docker pull grafana/grafana-arm32v7-linux:latest
+docker run -d --name=grafana -p 3000:3000 grafana/grafana-arm32v7-linux:6.0.2
 # http://YourRaspberryPiIpAddress:3000
 # REF: https://github.com/grafana/grafana/tree/master/packaging/docker
 
