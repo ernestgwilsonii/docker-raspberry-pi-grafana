@@ -1,22 +1,28 @@
-version: '3.4'
+version: '3.8'
 
 services:
 
   # REF: https://hub.docker.com/r/arm32v7/debian
   # REF: https://grafana.com/grafana/download/6.0.1?platform=arm
+  # REF: https://grafana.com/grafana/download/8.4.4?platform=docker <--Newest 64bit
   grafana:
-    image: ernestgwilsonii/docker-raspberry-pi-grafana:6.0.1
+    #image: ernestgwilsonii/docker-raspberry-pi-grafana:6.0.1
+    image: grafana/grafana-enterprise:8.4.4
     hostname: grafana
-    environment:
-      - GF_SERVER_PROTOCOL=https
-      - GF_SERVER_CERT_FILE=/var/lib/grafana/grafana.crt
-      - GF_SERVER_CERT_KEY=/var/lib/grafana/grafana.key
-      - GF_AUTH_LDAP_ENABLED=true
-      - GF_AUTH_LDAP_CONFIG_FILE=/var/lib/grafana/ldap.toml
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,percona-percona-app,raintank-kubernetes-app,ntop-ntopng-datasource,natel-plotly-panel,camptocamp-prometheus-alertmanager-datasource,vonage-status-panel,fetzerch-sunandmoon-datasource,radensolutions-netxms-datasource
+    #environment:
+      # REF: https://grafana.com/docs/grafana/v7.5/administration/configuration/
+      #- GF_SERVER_PROTOCOL=https
+      #- GF_SERVER_CERT_FILE=/var/lib/grafana/grafana.crt
+      #- GF_SERVER_CERT_KEY=/var/lib/grafana/grafana.key
+      #- GF_AUTH_LDAP_ENABLED=true
+      #- GF_AUTH_LDAP_CONFIG_FILE=/var/lib/grafana/ldap.toml
+      #- GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,percona-percona-app,raintank-kubernetes-app,ntop-ntopng-datasource,natel-plotly-panel,camptocamp-prometheus-alertmanager-datasource,vonage-status-panel,fetzerch-sunandmoon-datasource,radensolutions-netxms-datasource
     volumes:
+      # - type: bind
+      #   source: /opt/docker/grafana/etc/grafana
+      #   target: /etc/grafana
       - type: bind
-        source: /opt/grafana
+        source: /opt/docker/grafana/var/lib/grafana
         target: /var/lib/grafana
     networks:
       - grafana-net1
